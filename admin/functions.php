@@ -41,8 +41,8 @@ function findAllCategories()
         echo "<tr>";
         echo "<td>{$cat_id}</td>";
         echo "<td>{$cat_title}</td>";
-        echo "<td><a href='category.php?delete={$cat_id}'>Delete</a></td>";
-        echo "<td><a href='category.php?edit={$cat_id}'>edit</a></td>";
+        echo "<td><a class='btn btn-danger' href='category.php?delete={$cat_id}'>Delete</a></td>";
+        echo "<td><a class='btn btn-primary' href='category.php?edit={$cat_id}'>edit</a></td>";
         echo "<tr>";
     }
 }
@@ -50,7 +50,7 @@ function findAllCategories()
 function deleteCategories()
 {
     global $connection;
-    
+
     if (isset($_GET['delete'])) {
         $the_cat_id = $_GET['delete'];
 

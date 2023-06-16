@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -19,19 +20,32 @@
                 $select_all_categories_query = mysqli_query($connection, $query);
                 while ($row = mysqli_fetch_assoc($select_all_categories_query)) {
                     $cat_title = $row['cat_title'];
-                    echo "<li><a href='#'>{$cat_title}</a></li>";
+                    $cat_id = $row['cat_id'];
+                    echo "<li><a href='category.php?category=$cat_id'>{$cat_title}</a></li>";
                 }
 
                 ?>
                 <li>
                     <a href="admin/">Admin</a>
                 </li>
-                <!-- <li>
-                    <a href="#">Services</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li> -->
+                <?php
+
+                if (isset($_SESSION['user_role'])) {
+
+                    if (isset($_GET['p_id'])) {
+                        $p_id = $_GET['p_id'];
+                        echo "<li>
+                        <a href='admin/posts.php?source=edit_post&p_id={$p_id}'>Edit Post</a>
+                    </li>";
+                    }
+                } else {
+                    echo "<li>
+                    <a href='Registration.php'>Registration</a>
+                </li>";
+                }
+
+                ?>
+
             </ul>
         </div>
         <!-- /.navbar-collapse -->
